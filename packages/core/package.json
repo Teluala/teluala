@@ -1,0 +1,57 @@
+{
+  "name": "teluala",
+  "version": "0.1.0-beta.1",
+  "description": "A lightweight, high-performance WebGPU globe engine for the web.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teluala/teluala.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://teluala.github.io/",
+  "bugs": {
+    "url": "https://github.com/teluala/teluala/issues"
+  },
+  "keywords": [
+    "webgpu",
+    "globe",
+    "geospatial",
+    "wgs84",
+    "3d"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/postbuild.mjs && node scripts/build-cdn.mjs",
+    "example": "python3 -m http.server 4174 --bind 127.0.0.1 --directory .",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "pack:check": "npm pack --dry-run"
+  },
+  "devDependencies": {
+    "@webgpu/types": "^0.1.40",
+    "typescript": "^5.5.0",
+    "esbuild": "0.28.2"
+  },
+  "peerDependencies": {
+    "@webgpu/types": ">=0.1.40"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  },
+  "unpkg": "./dist/teluala.min.js",
+  "jsdelivr": "./dist/teluala.min.js"
+}

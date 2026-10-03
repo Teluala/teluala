@@ -1,0 +1,12 @@
+{
+  "name": "teluala-workspace",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13.0" },
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces"
+  }
+}

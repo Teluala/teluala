@@ -1,0 +1,46 @@
+{
+  "name": "@teluala/terrain",
+  "version": "0.1.0-beta.1",
+  "private": true,
+  "description": "Shared elevation sources and sampling for Teluala.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teluala/teluala.git",
+    "directory": "packages/terrain"
+  },
+  "homepage": "https://teluala.github.io/",
+  "bugs": {
+    "url": "https://github.com/teluala/teluala/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "teluala": ">=0.1.0-beta.1 <0.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@webgpu/types": "^0.1.40",
+    "teluala": "0.1.0-beta.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  }
+}

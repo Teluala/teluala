@@ -1,0 +1,53 @@
+{
+  "name": "@teluala/vector",
+  "version": "0.1.0-beta.1",
+  "private": true,
+  "type": "module",
+  "description": "Optional MVT/PMTiles vector layer package for Teluala.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teluala/teluala.git",
+    "directory": "packages/vector"
+  },
+  "homepage": "https://teluala.github.io/",
+  "bugs": {
+    "url": "https://github.com/teluala/teluala/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.txt"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "peerDependencies": {
+    "teluala": ">=0.1.0-beta.1 <0.2.0"
+  },
+  "dependencies": {
+    "@mapbox/vector-tile": "^2.0.5",
+    "earcut": "^3.2.4",
+    "pbf": "^4.0.2"
+  },
+  "devDependencies": {
+    "@webgpu/types": "^0.1.40",
+    "esbuild": "^0.28.2",
+    "teluala": "0.1.0-beta.1",
+    "typescript": "^5.5.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && esbuild src/mvtWorkerEntry.ts --bundle --format=esm --platform=browser --outfile=dist/mvtWorkerEntry.js --allow-overwrite --log-level=warning --minify-whitespace --legal-comments=inline '--banner:js=/*! Teluala @teluala/vector MVT worker. Copyright (c) 2026 The Teluala Authors. SPDX-License-Identifier: MIT. Bundles @mapbox/vector-tile, @mapbox/point-geometry, pbf and earcut under their own licenses; see the accompanying third-party notices. */'",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  }
+}
