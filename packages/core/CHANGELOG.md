@@ -2,7 +2,8 @@
 
 ## 0.1.0-beta.3
 
-Release candidate for the first npm publication. No core API changes.
+Published to npm on 2026-10-04 (UTC), together with `@teluala/terrain`,
+`@teluala/raster`, and `@teluala/vector`. No core API changes.
 
 - Build and validate all four tarballs before publishing.
 - Save release artifacts and publish explicitly with the beta tag.
