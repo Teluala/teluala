@@ -4,7 +4,28 @@
  */
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { checkExisting, checkFiles, registry } from './release.mjs';
+import { checkExisting, checkFiles, registry, waitForPublication } from './release.mjs';
+
+test('post-publication verification tolerates registry propagation but never a different tarball', async () => {
+  const entry = { name: 'teluala', version: '0.1.0-beta.3', integrity: 'sha512-reviewed' };
+  let calls = 0;
+  let sleeps = 0;
+  const lookup = async (path) => {
+    calls++;
+    if (calls === 1) return null;
+    if (path.includes('/')) return { ...entry, dist: { integrity: entry.integrity } };
+    return { 'dist-tags': { beta: calls >= 5 ? entry.version : 'old' } };
+  };
+  await waitForPublication(entry, { lookup, sleep: async () => { sleeps++; } });
+  assert.equal(sleeps, 2);
+  await assert.rejects(waitForPublication(entry, {
+    lookup: async () => ({ ...entry, dist: { integrity: 'sha512-wrong' } }),
+    sleep: async () => { throw new Error('Should not retry mismatched artifacts'); },
+  }), /Registry artifact differs/);
+  await assert.rejects(waitForPublication(entry, {
+    lookup: async () => null, sleep: async () => {}, attempts: 2,
+  }), /visibility timed out/);
+});
 
 test('only registry 404 means absent; permissions and network errors stop publication', async () => {
   const original = globalThis.fetch;

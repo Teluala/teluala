@@ -34,10 +34,29 @@ export function checkExisting(metadata, entry) {
 }
 
 export async function registry(path) {
-  const response = await fetch(`https://registry.npmjs.org/${path}`, { signal: AbortSignal.timeout(30000) });
+  const response = await fetch(`https://registry.npmjs.org/${path}`, { signal: AbortSignal.timeout(30000), cache: 'no-store' });
   if (response.status === 404) return null;
   assert.ok(response.ok, `Registry lookup failed (HTTP ${response.status}); stopping`);
   return response.json();
+}
+
+export async function waitForPublication(entry, {
+  lookup = registry,
+  sleep = (ms) => new Promise((done) => setTimeout(done, ms)),
+  attempts = 8,
+  delayMs = 2000,
+} = {}) {
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const metadata = await lookup(`${encodeURIComponent(entry.name)}/${entry.version}`);
+    if (metadata) {
+      // A different artifact is never treated as propagation delay.
+      checkExisting(metadata, entry);
+      const document = await lookup(encodeURIComponent(entry.name));
+      if (document?.['dist-tags']?.beta === entry.version) return;
+    }
+    if (attempt + 1 < attempts) await sleep(delayMs);
+  }
+  throw new Error('Publication accepted but registry visibility timed out; verify saved artifacts before resuming');
 }
 
 function validateEntry(dir, entry) {
@@ -120,14 +139,15 @@ async function main() {
     }
     const result = spawnSync('npm', ['publish', resolve(dir, entry.filename), '--ignore-scripts', '--tag', 'beta', '--access', 'public', '--provenance', '--registry', 'https://registry.npmjs.org/'], { cwd: root, stdio: 'inherit' });
     assert.equal(result.status, 0, `Publish failed for ${entry.name}; original artifacts are preserved`);
-    checkExisting(await registry(`${encodeURIComponent(entry.name)}/${entry.version}`), entry);
-    const document = await registry(encodeURIComponent(entry.name));
-    assert.equal(document?.['dist-tags']?.beta, entry.version, 'Published beta tag mismatch');
+    await waitForPublication(entry);
   }
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  main().catch(() => {
+  main().catch((error) => {
+    if (error.code === 'ERR_ASSERTION' || error.message.startsWith('Publication accepted')) {
+      console.error(error.message.split('\n')[0]);
+    }
     console.error('Release validation/publication stopped. Inspect the failing step; never overwrite a published version.');
     process.exitCode = 1;
   });

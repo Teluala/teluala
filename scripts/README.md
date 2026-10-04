@@ -23,7 +23,9 @@ node --test scripts/release.test.mjs
 The manifest records the source commit, four package versions and SHA256/SHA512
 hashes. The publish command uses explicit beta/public settings and provenance.
 It preflights all registry lookups and only skips versions with matching
-integrity and beta tags. Network and permission errors stop the release.
+integrity and beta tags. Network and permission errors stop the release. After npm accepts a publish,
+verification bypasses cached responses and allows a bounded wait for the exact
+version and beta tag to become visible. Integrity mismatches stop immediately.
 
 If publication fails partway, use Re-run failed jobs for the publish job while
 the original prepare artifacts are retained. Do not rerun all jobs to rebuild
