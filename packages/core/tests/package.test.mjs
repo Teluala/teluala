@@ -15,12 +15,12 @@ const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
 
 test('package metadata points only to public Teluala properties', () => {
   assert.equal(packageJson.name, 'teluala');
-  assert.equal(packageJson.version, '0.1.0-beta.2');
+  assert.equal(packageJson.version, '0.1.0-beta.3');
   assert.equal(packageJson.license, 'MIT');
   assert.equal(packageJson.author, undefined);
   assert.equal(packageJson.homepage, 'https://teluala.github.io/');
   assert.equal(packageJson.publishConfig.tag, 'beta');
-  assert.match(packageJson.repository.url, /github\.com\/teluala\/teluala/);
+  assert.match(packageJson.repository.url, /github\.com\/Teluala\/teluala/);
 });
 
 test('package exports only the core entry point', () => {

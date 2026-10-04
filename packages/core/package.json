@@ -1,12 +1,12 @@
 {
   "name": "teluala",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0-beta.3",
   "description": "A lightweight, high-performance WebGPU globe engine for the web.",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/teluala/teluala.git",
+    "url": "git+https://github.com/Teluala/teluala.git",
     "directory": "packages/core"
   },
   "homepage": "https://teluala.github.io/",
@@ -38,7 +38,8 @@
     "example": "python3 -m http.server 4174 --bind 127.0.0.1 --directory .",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "npm run build && node --test tests/*.test.mjs",
-    "pack:check": "npm pack --dry-run"
+    "pack:check": "npm pack --dry-run",
+    "prepack": "npm run build"
   },
   "devDependencies": {
     "@webgpu/types": "^0.1.40",

@@ -5,7 +5,7 @@
 Teluala is a small, framework-independent WebGPU engine for rendering a WGS84
 ellipsoid and composing independently installed globe layers in the browser.
 
-> **Public beta: `0.1.0-beta.2`.** APIs may change before the first stable
+> **Public beta: `0.1.0-beta.3`.** APIs may change before the first stable
 > release.
 
 [Website](https://teluala.github.io/) ·
@@ -89,7 +89,7 @@ Save this as an HTML file and serve it over HTTPS or localhost:
   <body>
     <canvas id="globe"></canvas>
     <script type="module">
-      import { GlobeEngine } from 'https://cdn.jsdelivr.net/npm/teluala@0.1.0-beta.2/dist/teluala.min.js';
+      import { GlobeEngine } from 'https://cdn.jsdelivr.net/npm/teluala@0.1.0-beta.3/dist/teluala.min.js';
 
       try {
         const globe = await GlobeEngine.create(document.querySelector('#globe'));
@@ -104,7 +104,7 @@ Save this as an HTML file and serve it over HTTPS or localhost:
 
 Pin the full version and file path, as shown above, so upgrades are deliberate.
 The equivalent UNPKG URL is
-`https://unpkg.com/teluala@0.1.0-beta.2/dist/teluala.min.js`.
+`https://unpkg.com/teluala@0.1.0-beta.3/dist/teluala.min.js`.
 
 The CDN file includes all core exports, has no external imports, and retains
 the MIT license notice. It requires `type="module"`; it does not create a

@@ -1,9 +1,17 @@
 # Changelog
 
+## 0.1.0-beta.3
+
+Release candidate for the first npm publication. No core API changes.
+
+- Build and validate all four tarballs before publishing.
+- Save release artifacts and publish explicitly with the beta tag.
+- Verify registry integrity before resuming a partial publication.
+
 ## 0.1.0-beta.2
 
-First release published to npm, together with `@teluala/terrain`,
-`@teluala/raster`, and `@teluala/vector`. No API changes from 0.1.0-beta.1.
+GitHub release; npm publication failed during authentication.
+No API changes from 0.1.0-beta.1.
 
 ## 0.1.0-beta.1
 
