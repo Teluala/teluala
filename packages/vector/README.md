@@ -9,12 +9,10 @@ peer dependency). Tiles are decoded in a module worker and drawn through
 
 ## Install
 
-npm packages: coming soon. Until then, build the repository as described in
-the [root README](../../README.md#install), then add this package together
-with the core, giving the path to your clone:
+Install this package together with the core:
 
 ```sh
-npm install ../teluala/packages/core ../teluala/packages/vector
+npm install teluala@beta @teluala/vector@beta
 ```
 
 ## Usage

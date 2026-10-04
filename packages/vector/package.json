@@ -1,7 +1,6 @@
 {
   "name": "@teluala/vector",
   "version": "0.1.0-beta.1",
-  "private": true,
   "type": "module",
   "description": "Optional MVT/PMTiles vector layer package for Teluala.",
   "license": "MIT",

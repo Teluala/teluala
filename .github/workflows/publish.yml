@@ -1,0 +1,69 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Check tooling
+        run: |
+          node -e '
+            const [a, b, c] = process.argv[1].split(".").map(Number);
+            if (a < 11 || (a === 11 && (b < 5 || (b === 5 && c < 1)))) {
+              console.error(`npm ${process.argv[1]} is older than 11.5.1`);
+              process.exit(1);
+            }
+          ' "$(npm --version)"
+
+      - name: Check tag matches package versions
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          for pkg in packages/core packages/terrain packages/raster packages/vector; do
+            version="$(node -p "require('./$pkg/package.json').version")"
+            if [ "$version" != "$tag" ]; then
+              echo "::error::$pkg is $version, tag is $GITHUB_REF_NAME"
+              exit 1
+            fi
+          done
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          for pkg in packages/core packages/terrain packages/raster packages/vector; do
+            name="$(node -p "require('./$pkg/package.json').name")"
+            version="$(node -p "require('./$pkg/package.json').version")"
+            if npm view "$name@$version" version >/dev/null 2>&1; then
+              echo "$name@$version is already published; skipping"
+              continue
+            fi
+            (cd "$pkg" && npm publish --provenance)
+          done

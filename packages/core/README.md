@@ -6,7 +6,7 @@ Teluala is a small, framework-independent WebGPU engine for rendering a WGS84
 ellipsoid and composing independently installed globe layers in the browser.
 
 > **Public beta: `0.1.0-beta.1`.** APIs may change before the first stable
-> release. npm packages: coming soon; until then, install from GitHub.
+> release.
 
 [Website](https://teluala.github.io/) ·
 [Source](https://github.com/teluala/teluala/tree/main/packages/core) ·
@@ -19,19 +19,8 @@ terrain data, or a WebGL fallback.
 
 ## Install
 
-npm packages: coming soon. Until then, build Teluala from the GitHub repository:
-
 ```sh
-git clone https://github.com/teluala/teluala.git
-cd teluala
-npm ci
-npm run build
-```
-
-Then add the built core to your application, giving the path to your clone:
-
-```sh
-npm install ../teluala/packages/core
+npm install teluala@beta
 ```
 
 Teluala is ESM-only and requires a browser with WebGPU in a secure context.
@@ -82,10 +71,8 @@ your application's UI. Call `globe.destroy()` when removing the canvas.
 
 ## CDN
 
-For a page without a build step, load the standalone ES module. Until the npm
-release, copy `packages/core/dist/teluala.min.js` from your build into your
-site and import it from there. After the npm release, load it from jsDelivr
-as below. Save this as an HTML file and serve it over HTTPS or localhost:
+For a page without a build step, load the standalone ES module from jsDelivr.
+Save this as an HTML file and serve it over HTTPS or localhost:
 
 ```html
 <!doctype html>
@@ -118,7 +105,6 @@ as below. Save this as an HTML file and serve it over HTTPS or localhost:
 Pin the full version and file path, as shown above, so upgrades are deliberate.
 The equivalent UNPKG URL is
 `https://unpkg.com/teluala@0.1.0-beta.1/dist/teluala.min.js`.
-These URLs become available after this version is published to npm.
 
 The CDN file includes all core exports, has no external imports, and retains
 the MIT license notice. It requires `type="module"`; it does not create a

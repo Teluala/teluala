@@ -13,23 +13,12 @@ runtime dependencies.
 
 ## Install
 
-npm packages: coming soon. Until then, build Teluala from this repository:
-
 ```sh
-git clone https://github.com/teluala/teluala.git
-cd teluala
-npm ci
-npm run build
+npm install teluala@beta
 ```
 
-Then add the built core to your application, giving the path to your clone:
-
-```sh
-npm install ../teluala/packages/core
-```
-
-Add `../teluala/packages/terrain`, `raster`, or `vector` to the same command
-for the optional packages.
+Add `@teluala/terrain@beta`, `@teluala/raster@beta`, or `@teluala/vector@beta`
+to the same command for the optional packages.
 
 ## Start with the core
 
@@ -53,11 +42,10 @@ You need WebGPU on HTTPS or localhost, with a compatible browser and GPU.
 There is no WebGL fallback. Handle initialization errors in your application
 and call `globe.destroy()` when removing the canvas.
 
-## Use a CDN (after the npm release)
+## Use a CDN
 
-Without a build step, use the standalone ES module. Until the npm release,
-copy `packages/core/dist/teluala.min.js` from your build into your site and
-import it from there. After the npm release, use the CDN with a pinned version:
+Without a build step, import the standalone ES module from a CDN with a pinned
+version:
 
 ```html
 <script type="module">
@@ -67,8 +55,8 @@ import it from there. After the npm release, use the CDN with a pinned version:
 ```
 
 See the [complete CDN example](packages/core/README.md#cdn) for a ready-to-use
-HTML page and the alternative UNPKG URL. CDN URLs become available after the
-version is published to npm. The npm and CDN builds expose the same core API.
+HTML page and the alternative UNPKG URL. The npm and CDN builds expose the
+same core API.
 
 ## Release scope
 
@@ -83,7 +71,7 @@ APIs may change before the first stable release.
 | [`@teluala/vector`](packages/vector/) | Mapbox Vector Tiles | Public beta |
 
 Each package is published separately; install only the features your
-application needs. npm packages are coming soon.
+application needs.
 
 ## Develop
 

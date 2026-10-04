@@ -9,12 +9,10 @@ imagery over elevation.
 
 ## Install
 
-npm packages: coming soon. Until then, build the repository as described in
-the [root README](../../README.md#install), then add this package together
-with the core, giving the path to your clone:
+Install this package together with the core:
 
 ```sh
-npm install ../teluala/packages/core ../teluala/packages/raster
+npm install teluala@beta @teluala/raster@beta
 ```
 
 ## Usage

@@ -129,7 +129,7 @@ test('README distinguishes the core picking pass from layer-specific selection',
 
 test('README keeps optional packages out of the core installation examples', () => {
   assert.match(readme, /The core examples do not need\s+them/);
-  assert.doesNotMatch(readme, /npmjs\.com|npm install teluala@/);
+  assert.match(readme, /^npm install teluala@beta$/m);
   assert.doesNotMatch(readme, /npm install[^\n]*@teluala\//);
   assert.doesNotMatch(readme, /from '@teluala\//);
 });
