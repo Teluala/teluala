@@ -51,6 +51,8 @@ jobs:
           done
 
       - run: npm ci
+      # The optional packages type-check against the built core in packages/core/dist.
+      - run: npm run build
       - run: npm run typecheck
       - run: npm test
 
