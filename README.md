@@ -49,7 +49,7 @@ version:
 
 ```html
 <script type="module">
-  import { GlobeEngine } from 'https://cdn.jsdelivr.net/npm/teluala@0.1.0-beta.1/dist/teluala.min.js';
+  import { GlobeEngine } from 'https://cdn.jsdelivr.net/npm/teluala@0.1.0-beta.2/dist/teluala.min.js';
   // Create the globe with a sized canvas, as in the setup guide.
 </script>
 ```

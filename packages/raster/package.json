@@ -1,6 +1,6 @@
 {
   "name": "@teluala/raster",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "description": "XYZ imagery layers for the Teluala WebGPU globe.",
   "type": "module",
   "license": "MIT",
@@ -31,12 +31,12 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "peerDependencies": {
-    "teluala": ">=0.1.0-beta.1 <0.2.0"
+    "teluala": ">=0.1.0-beta.2 <0.2.0"
   },
   "devDependencies": {
     "typescript": "^5.5.0",
     "@webgpu/types": "^0.1.40",
-    "teluala": "0.1.0-beta.1"
+    "teluala": "0.1.0-beta.2"
   },
   "publishConfig": {
     "access": "public",

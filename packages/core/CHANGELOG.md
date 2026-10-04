@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.2
+
+First release published to npm, together with `@teluala/terrain`,
+`@teluala/raster`, and `@teluala/vector`. No API changes from 0.1.0-beta.1.
+
 ## 0.1.0-beta.1
 
-Initial beta release candidate; not yet published.
+Initial public beta, released on GitHub only.
 
 - WebGPU globe engine with WGS84 ellipsoid rendering, camera controls,
   ground picking, and configurable camera limits and near-plane policy.

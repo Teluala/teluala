@@ -1,6 +1,6 @@
 {
   "name": "@teluala/vector",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "type": "module",
   "description": "Optional MVT/PMTiles vector layer package for Teluala.",
   "license": "MIT",
@@ -28,7 +28,7 @@
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "peerDependencies": {
-    "teluala": ">=0.1.0-beta.1 <0.2.0"
+    "teluala": ">=0.1.0-beta.2 <0.2.0"
   },
   "dependencies": {
     "@mapbox/vector-tile": "^2.0.5",
@@ -38,7 +38,7 @@
   "devDependencies": {
     "@webgpu/types": "^0.1.40",
     "esbuild": "^0.28.2",
-    "teluala": "0.1.0-beta.1",
+    "teluala": "0.1.0-beta.2",
     "typescript": "^5.5.0"
   },
   "scripts": {
