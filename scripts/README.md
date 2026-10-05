@@ -7,10 +7,27 @@ The publish job downloads those exact files and runs in the npm environment.
 
 Release tags must match all four package versions and point to a commit on main.
 Push only the reviewed release tag; merging a PR does not publish to npm.
-The first release needs a direct-capable granular token with package creation
-rights and bypass 2FA; a stage-only token cannot create the initial package.
-Store it only in the npm environment's NPM_TOKEN secret. After initial release,
-configure trusted publishing for each package and migrate to OIDC.
+Publication uses npm trusted publishing (OIDC), without an NPM_TOKEN secret.
+Configure a GitHub Actions trusted publisher separately for teluala,
+@teluala/terrain, @teluala/raster and @teluala/vector on npm:
+
+- Organization or user: `Teluala`
+- Repository: `teluala`
+- Workflow filename: `publish.yml` (filename only)
+- Environment: `npm`
+- Allowed actions: allow direct `npm publish`
+
+The publish job alone has `id-token: write` and uses GitHub-hosted runners,
+Node 24 and npm 11.5.1 or later. New trusted publishers default to staged
+publishing, so direct publication must be explicitly allowed for this workflow.
+See https://docs.npmjs.com/trusted-publishers/ for the current requirements.
+
+The initial packages were created using a granular token. During migration,
+retain that token until a legitimate new release succeeds through OIDC. A PR
+check or a rerun that skips already published versions does not prove OIDC
+publication works. After successful publication of all four packages, revoke
+the bootstrap token, remove the npm environment's NPM_TOKEN secret and restrict
+traditional token publishing in each package's npm settings.
 
 For local packaging verification after a full workspace build:
 

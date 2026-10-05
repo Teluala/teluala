@@ -85,6 +85,4 @@ jobs:
           name: release-${{ github.sha }}
           path: ${{ runner.temp }}/release-artifacts
       - name: Publish exact reviewed tarballs
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: node scripts/release.mjs publish "$RUNNER_TEMP/release-artifacts"
